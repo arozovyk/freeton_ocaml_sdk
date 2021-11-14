@@ -62,6 +62,12 @@ jobs:
       - run: opam depext -y freeton_ocaml_sdk freeton_client_lib
 #        if: steps.cache-opam.outputs.cache-hit != 'true'
 
+      - name: Configure openssl
+      - run : | 
+          export PKG_CONFIG_PATH="/usr/local/Cellar/openssl@3/3.0.0_1/lib/pkgconfig"
+          export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/Cellar/openssl@3/3.0.0_1/lib
+        if: matrix.os == 'macos-latest'
+
       - run: opam install -y ./*.opam --deps-only --with-test
 #        if: steps.cache-opam.outputs.cache-hit != 'true'
 
@@ -77,7 +83,6 @@ jobs:
 
       - name: MacOS Build
         run: |
-          export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/Cellar/openssl@3/3.0.0_1/lib
           make build
         if: matrix.os == 'macos-latest'
 
