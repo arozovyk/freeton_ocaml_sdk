@@ -63,7 +63,7 @@ jobs:
 #        if: steps.cache-opam.outputs.cache-hit != 'true'
 
       - name: Configure openssl
-      - run : | 
+        run : | 
           export PKG_CONFIG_PATH="/usr/local/Cellar/openssl@3/3.0.0_1/lib/pkgconfig"
           export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/Cellar/openssl@3/3.0.0_1/lib
         if: matrix.os == 'macos-latest'
