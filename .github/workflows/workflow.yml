@@ -71,11 +71,6 @@ jobs:
         if: matrix.os == 'macos-latest'
 
 
-       - run: opam install conf-libssl
-#      - run: opam install -y ./*.opam --deps-only --with-test
-#        if: steps.cache-opam.outputs.cache-hit != 'true'
-
-#      - run: opam upgrade --fixup
-#        if: steps.cache-opam.outputs.cache-hit == 'true'
+      - run: opam install conf-libssl
 
  
