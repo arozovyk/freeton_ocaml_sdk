@@ -57,13 +57,14 @@ jobs:
 
       # define opam-repo = "git+https://" to add an extra opam repo
 
-      - run: opam pin add . -y --no-action
+    #  - run: opam pin add . -y --no-action
 
-      - run: opam depext -y freeton_ocaml_sdk freeton_client_lib
+    #  - run: opam depext -y freeton_ocaml_sdk freeton_client_lib
 #        if: steps.cache-opam.outputs.cache-hit != 'true'
 
       - name: Configure openssl
         run : | 
+          brew install openssl
           export LDFLAGS="-L/usr/local/opt/openssl@3/lib"
           export CPPFLAGS="-I/usr/local/opt/openssl@3/include"
           export PKG_CONFIG_PATH=/usr/local/opt/openssl@3/lib/pkgconfig
@@ -71,6 +72,6 @@ jobs:
         if: matrix.os == 'macos-latest'
 
 
-      - run: opam install conf-libssl
+      - run: opam install -y conf-libssl
 
  
